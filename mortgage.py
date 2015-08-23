@@ -2,22 +2,23 @@ total_sum = 200000
 monthly_payment = 1000
 overpayment = 500
 
-def calc(total_sum, percent_annually, monthly_payment, overpayment, period_years, fees, years):
+def calc(total_sum, percent_annually, monthly_payment, overpayment, period_years, fees):
     percent_payment_total = fees
     for i in range(period_years * 12):
         percent_payment = total_sum / 100 * percent_annually / 12
         percent_payment_total += percent_payment
         total_sum -= monthly_payment + overpayment - percent_payment
-    print( total_sum, percent_payment_total)
+    print(total_sum, percent_payment_total)
 
-calc (total_sum, 1.74, 912.34, overpayment, 2, 999, 2)
-calc (total_sum, 2.04, 940.88, overpayment, 2, 0, 2)
-calc (total_sum, 2.29, 965.07, overpayment, 2, 999, 3)
-calc (total_sum, 2.59, 994.59, overpayment, 2, 0, 3)
-calc (total_sum, 2.44, 979.76, overpayment, 2, 999, 4)
-calc (total_sum, 2.69, 1004.54, overpayment, 2, 0, 4)
-calc (total_sum, 2.64, 999.56, overpayment, 2, 999, 5)
-calc (total_sum, 2.79, 1014.56, overpayment, 2, 0, 5)
-calc (total_sum, 3.24, 1060.36, overpayment, 2, 999, 10)
-calc (total_sum, 3.34, 1070.70, overpayment, 2, 0, 10)
+# years, percent with 999 fee, percent without fee
+mortgages = [
+    (2, 1.74, 2.04),
+    (3, 2.29, 2.59),
+    (4, 2.44, 2.69),
+    (5, 2.64, 2.79),
+    (10, 3.24, 3.34)
+]
 
+for m in mortgages:
+  calc(total_sum, m[1], monthly_payment, overpayment, 2, 999)
+  calc(total_sum, m[2], monthly_payment, overpayment, 2, 0)
